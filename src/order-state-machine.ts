@@ -28,7 +28,8 @@ export const ORDER_TRANSITIONS: Record<OrderStatus, OrderStatus[]> = {
   PAID: ["PACKING", "CANCELLED"],
   PACKING: ["READY_FOR_PICKUP", "CANCELLED"],
   READY_FOR_PICKUP: ["OUT_FOR_DELIVERY", "CANCELLED"],
-  OUT_FOR_DELIVERY: ["DELIVERED", "READY_FOR_PICKUP"],
+  // CANCELLED here = the courier brought the parcel back (RTO).
+  OUT_FOR_DELIVERY: ["DELIVERED", "READY_FOR_PICKUP", "CANCELLED"],
   DELIVERED: [],
   // An accidental pharmacist rejection can be revoked by an admin, putting the
   // order back into the review queue. This is the only way out of REJECTED.
