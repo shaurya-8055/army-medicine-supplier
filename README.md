@@ -50,39 +50,10 @@ architecture, both apps, AWS infrastructure, on-call.
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    U[Customer / staff browser]
+![Architecture](assets/architecture.svg)
 
-    subgraph Vercel
-        WEB["Next.js 15<br/>App Router · SSR / ISR"]
-    end
-
-    subgraph AWS["AWS ap-south-1 (Mumbai) — provisioned by CDK"]
-        subgraph EC2["EC2 t4g.small · Graviton · Amazon Linux 2023"]
-            CADDY["Caddy<br/>TLS · auto-certs"]
-            API["NestJS API<br/>systemd service"]
-            CLAM["ClamAV<br/>127.0.0.1:3310"]
-        end
-        RDS[("RDS PostgreSQL 17<br/>private · encrypted")]
-        S3[("S3<br/>private bucket")]
-    end
-
-    REDIS[("Redis Cloud<br/>BullMQ · rate limits · token revocation")]
-    BACKUP[("Prisma Postgres<br/>nightly off-AWS copy")]
-
-    U -->|HTTPS| WEB
-    U -->|"REST + WebSocket<br/>Bearer JWT"| CADDY
-    U -->|pre-signed PUT / GET| S3
-    CADDY --> API
-    API --> RDS
-    API --> REDIS
-    API --> S3
-    API --> CLAM
-    API -.->|pg_dump nightly| BACKUP
-
-    API <-->|"HMAC-signed webhooks"| EXT["Razorpay · Shadowfax<br/>Meta WhatsApp · Email · Sentry"]
-```
+Drawn in Excalidraw. Source: [`assets/architecture.excalidraw`](assets/architecture.excalidraw)
+(open it at [excalidraw.com](https://excalidraw.com) to edit).
 
 **Why this shape**
 
