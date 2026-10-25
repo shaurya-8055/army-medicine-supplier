@@ -1,5 +1,7 @@
 # Army Medicine Supplier
 
+[![state machine spec](https://github.com/shaurya-8055/army-medicine-supplier/actions/workflows/test.yml/badge.svg)](https://github.com/shaurya-8055/army-medicine-supplier/actions/workflows/test.yml)
+
 Production e-pharmacy and home-delivery platform for ECHS beneficiaries, ex-servicemen
 and army families. A customer photographs a prescription, a registered pharmacist verifies
 it and prices it, the customer says yes, and the medicines arrive at the door — usually
@@ -290,6 +292,20 @@ The suites cover the order state machine, payment verification and webhook recon
 the rate-limit guard, onboarding, Shadowfax booking and RTO handling, WhatsApp delivery,
 email templates, chat conversations, the drop-off funnel and input utilities (Indian mobile
 numbers, email addresses, image optimisation, webhook signatures).
+
+### Running the spec in this repository
+
+The pipeline above runs in the private repository. This one runs only the order state
+machine spec, on every push:
+
+```bash
+npm install
+npm test
+```
+
+[`src/`](src/) is unmodified production code. Its two imports from the private codebase,
+Prisma's generated `OrderStatus` enum and `InvalidStateTransitionException`, are pointed at
+minimal stand-ins in [`test/stubs/`](test/stubs/) by [`vitest.config.mjs`](vitest.config.mjs).
 
 ---
 
