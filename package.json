@@ -1,0 +1,11 @@
+{
+  "name": "army-medicine-supplier-showcase",
+  "private": true,
+  "description": "Runs the order state machine spec copied from the production API.",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "3.2.4"
+  }
+}
