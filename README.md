@@ -344,4 +344,6 @@ Independent licensed pharmacy. Not affiliated with ECHS, the Indian Army or the 
 
 ---
 
+© 2026 Shaurya Shakya. All rights reserved. Shown for portfolio purposes.
+
 Built by [Shaurya Shakya](https://github.com/shaurya-8055) · [armymedicinesupplier.in](https://www.armymedicinesupplier.in)
